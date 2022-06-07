@@ -1,0 +1,22 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "Hello world app to run CI/CD pipeline",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrisais/hello-world.git"
+  },
+  "author": "Shri Sai Sadhana Natarajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shrisais/hello-world/issues"
+  },
+  "homepage": "https://github.com/shrisais/hello-world#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
