@@ -5,7 +5,20 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src",
-    "test": "jest src/app.test.js"
+    "test": "jest --coverage",
+    "sonar": "node sonar-project.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testResultsProcessor": "jest-sonar-reporter"
+  },
+  "jestSonar": {
+    "reportPath": "coverage",
+    "reportFile": "test-reporter.xml",
+    "indent": 4
   },
   "repository": {
     "type": "git",
@@ -21,7 +34,9 @@
     "express": "^4.18.1"
   },
   "devDependencies": {
-    "jest": "^28.1.0",
+    "jest": "^28.1.1",
+    "jest-sonar-reporter": "^2.0.0",
+    "sonarqube-scanner": "^2.8.1",
     "supertest": "^6.2.3"
   }
 }
