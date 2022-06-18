@@ -19,6 +19,16 @@ jobs:
            fetch-depth: 0
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=hello-world-ci-cd
+            -Dsonar.projectKey=hello-world-app-ci-cd
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=src/**/__tests__/**
+            -Dsonar.exclusions=src/**/__tests__/**
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+            -Dsonar.coverage.exclusions=__mocks__/**,.storybook/**,src/stories/**,src/types/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
