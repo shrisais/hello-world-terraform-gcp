@@ -3,6 +3,7 @@ sonarqubeScanner(
     {
         serverUrl:  'http://localhost:9000',
         options : {
+            'sonar.projectKey': 'hello-world-app-ci-cd',
             'sonar.sources':  'src',
             'sonar.tests':  'src',
             'sonar.inclusions'  :  '**', // Entry point of your code
