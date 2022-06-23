@@ -8,10 +8,14 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("/Users/shri/Documents/Auth/gcp-credential.json")
+  credentials = var.gcp-creds
   project = "focus-poet-354200"
   region  = "us-central1"
   zone    = "us-central1-c"
+}
+
+variable "gcp-creds" {
+  default= ""
 }
 
 resource "google_compute_network" "vpc_network" {

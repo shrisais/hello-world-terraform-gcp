@@ -8,28 +8,6 @@ on:
 
 jobs:
 
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 18.3.0 ]
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm test
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
