@@ -15,7 +15,7 @@ terraform {
     organization = "hello-world-ci-cd"
 
     workspaces {
-      name = "gh-actions-demo"
+      name = "hello-world-pipeline"
     }
   }
 }
