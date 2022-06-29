@@ -9,6 +9,7 @@ on:
 jobs:
 
   build:
+    name: 'Build app'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,6 +26,7 @@ jobs:
 
 
   deploy:
+    name: 'Deploy to GCP'
     runs-on: ubuntu-latest
     needs: [ build ]
     defaults:
@@ -50,7 +52,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
