@@ -4,7 +4,7 @@
   "description": "Hello world app to run CI/CD pipeline",
   "main": "src/index.js",
   "engines": {
-    "node": "12"
+    "node": "18"
   },
   "scripts": {
     "start": "functions-framework --target=app --source=src",
