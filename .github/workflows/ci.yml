@@ -30,6 +30,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: terraform/environments/development
 
     steps:
       - name: Checkout
