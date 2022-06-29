@@ -1,20 +1,19 @@
-# terraform/modules/function/main.tf
-
 locals {
   timestamp = formatdate("YYMMDDhhmmss", timestamp())
-    root_dir = abspath("../")
 }
 
 # Compress source code
 data "archive_file" "source" {
   type        = "zip"
-  source_dir  = local.root_dir
+  source_dir  = "../../../"
   output_path = "/tmp/function-${local.timestamp}.zip"
+  # excludes    = [ "../../../terraform" ]
 }
 
 # Create bucket that will host the source code
 resource "google_storage_bucket" "bucket" {
   name = "${var.project}-function"
+  location = "US"
 }
 
 # Add source code zip to bucket
@@ -45,14 +44,14 @@ resource "google_project_service" "cb" {
 
 # Create Cloud Function
 resource "google_cloudfunctions_function" "function" {
-  name    = var.function_name
-  runtime = "nodejs12" # Switch to a different runtime if needed
+  name    = var.name
+  runtime = "nodejs12"
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.bucket.name
   source_archive_object = google_storage_bucket_object.zip.name
   trigger_http          = true
-  entry_point           = var.function_entry_point
+  entry_point           = var.entry_point
 }
 
 # Create IAM entry so all users can invoke the function

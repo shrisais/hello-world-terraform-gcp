@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "Hello world app to run CI/CD pipeline",
   "main": "src/index.js",
+  "engines": {
+    "node": "12"
+  },
   "scripts": {
-    "start": "node src",
+    "start": "functions-framework --target=app --source=src",
     "test": "jest --coverage",
-    "sonar": "node sonar-project.js"
+    "dev": "nodemon"
+  },
+  "nodemonConfig": {
+    "delay": "500",
+    "watch": "src",
+    "exec": "npm start || exit 1"
   },
   "jest": {
     "testEnvironment": "node",
@@ -38,6 +46,9 @@
     "jest": "^28.1.1",
     "jest-sonar-reporter": "^2.0.0",
     "sonarqube-scanner": "^2.8.1",
-    "supertest": "^6.2.3"
+    "supertest": "^6.2.3",
+    "@google-cloud/functions-framework": "^1.7.1",
+    "@ruanmartinelli/prettier-config": "^1.0.0",
+    "nodemon": "^2.0.6"
   }
 }
