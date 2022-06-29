@@ -25,6 +25,7 @@ jobs:
 
 
   deploy:
+    name: 'Deploy to GCP'
     runs-on: ubuntu-latest
     needs: [ build ]
     defaults:
