@@ -1,8 +1,11 @@
-const express = require("express");
-const app = express();
-app.disable("x-powered-by");
+const fastify = require('fastify')
+const app = fastify({ logger: true })
 
-app.get("/", (_req, res) =>  {
-    res.status(200).send("Hello Class!")
+app.get('/', async (req, res) => {
+    return { works: true }
 })
-module.exports = app;
+
+exports.app = async (req, res) => {
+    await app.ready()
+    app.server.emit('request', req, res)
+}
