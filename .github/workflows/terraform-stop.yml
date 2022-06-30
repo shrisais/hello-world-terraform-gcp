@@ -1,16 +1,14 @@
-name: Terraform Start
+name: Terraform Destroy
 on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: 'Deploy to GCP'
+  tf-destroy:
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
         working-directory: terraform/environments/development
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,15 +21,14 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - name: Terraform Plan
-        run: terraform plan
+      - name: Show Destroy plan
+        run: terraform plan -destroy
+        continue-on-error: true
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - name: Terraform Apply
-        #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+      - name: Terraform destroy
+        id: destroy
+        run: terraform destroy -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-
-
