@@ -1,15 +1,15 @@
-const fastify = require('fastify')({ logger: true });
-const FaunaError = require('./errors/FaunaError.js');
+const fastify = require('fastify')
+const app = fastify({ logger: true })
 
 // Routes
-fastify.post('/login', require('./routes/login.js'));
-fastify.post('/logout', require('./routes/logout.js'));
-fastify.post('/users', require('./routes/create-user.js'));
-fastify.get('/users/:userId', require('./routes/get-user.js'));
-fastify.delete('/users/:userId', require('./routes/delete-user.js'));
+app.post('/login', require('./routes/login.js'));
+app.post('/logout', require('./routes/logout.js'));
+app.post('/users', require('./routes/create-user.js'));
+app.get('/users/:userId', require('./routes/get-user.js'));
+app.delete('/users/:userId', require('./routes/delete-user.js'));
 
 // Hooks
-fastify.addHook('onRequest', async (request, reply) => {
+app.addHook('onRequest', async (request, reply) => {
 
     // If the route is not private we ignore this hook
     if (!reply.context.config.isPrivate) return;
@@ -27,16 +27,17 @@ fastify.addHook('onRequest', async (request, reply) => {
 });
 
 // Decorators
-fastify.decorateRequest('faunaSecret', '');
+app.decorateRequest('faunaSecret', '');
 
-async function start () {
-    try {
-        await fastify.listen(3000);
-        fastify.log.info(`server listening on ${fastify.server.address().port}`);
-    } catch (err) {
-        fastify.log.error(err)
-        process.exit(1);
-    }
-};
+app.get('/', async (req, res) => {
+    return { works: true }
+})
 
-exports.app = start();
+app.get('/hi', async (req, res) => {
+    return "Hello Class!"
+})
+
+exports.app = async (req, res) => {
+    await app.ready()
+    app.server.emit('request', req, res)
+}
