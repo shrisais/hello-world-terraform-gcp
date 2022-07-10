@@ -45,7 +45,7 @@ resource "google_project_service" "cb" {
 # Create Cloud Function
 resource "google_cloudfunctions_function" "function" {
   name    = var.name
-  runtime = "nodejs12"
+  runtime = "nodejs16"
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.bucket.name

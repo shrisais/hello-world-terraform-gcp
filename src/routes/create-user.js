@@ -25,7 +25,7 @@ module.exports = {
 
         // FAUNA_SERVER_SECRET comes from our .env file
         const client = new faunadb.Client({
-            secret: process.env.FAUNA_SERVER_SECRET
+            secret: request.dbAccess
         });
 
         try {

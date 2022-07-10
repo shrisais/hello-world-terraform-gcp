@@ -1,5 +1,6 @@
 const fastify = require('fastify')
 const app = fastify({ logger: true })
+const FastifySecrets = require('fastify-secrets-gcp')
 
 // Routes
 app.post('/login', require('./routes/login.js'));
@@ -26,8 +27,14 @@ app.addHook('onRequest', async (request, reply) => {
     request.faunaSecret = faunaSecret;
 });
 
+app.addHook('preHandler', async (request, reply) => {
+    await app.ready()
+    request.dbAccess = app.secrets.dbKey
+});
+
 // Decorators
 app.decorateRequest('faunaSecret', '');
+app.decorateRequest('dbAccess', '');
 
 app.get('/', async (req, res) => {
     return { works: true }
@@ -36,6 +43,17 @@ app.get('/', async (req, res) => {
 app.get('/hi', async (req, res) => {
     return "Hello Class!"
 })
+
+app.register(FastifySecrets, {
+    secrets: {
+        dbKey: 'projects/311333457219/secrets/FAUNA_SERVER_SECRET/versions/latest'
+    }
+})
+
+app.addContentTypeParser('application/json', {}, (req, body, done) => {
+    done(null, body.body);
+});
+
 
 exports.app = async (req, res) => {
     await app.ready()

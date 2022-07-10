@@ -4,6 +4,7 @@ on:
 
 jobs:
   tf-destroy:
+    name: 'Remove all infra'
     runs-on: ubuntu-latest
     defaults:
       run:
