@@ -1,7 +1,7 @@
 const sonarqubeScanner =  require('sonarqube-scanner');
 sonarqubeScanner(
     {
-        serverUrl:  'http://127.0.0.1:9000',
+        serverUrl:  'http://localhost:9000',
         options : {
             'sonar.projectKey': 'hello-world-app-ci-cd',
             'sonar.sources':  'src',
