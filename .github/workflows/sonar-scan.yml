@@ -6,10 +6,10 @@ jobs:
   sonarqube:
     runs-on: self-hosted
     steps:
-        - uses: philips-software/sonar-scanner-action@<version>
+        - uses: philips-software/sonar-scanner-action@v1.5.0
           with:
             token: ${{ secrets.SONAR_QUBE_TOKEN }}
             projectName: hello-world
             projectKey: hello-world-app-ci-cd
-            baseDir: .
-            url: https://localhost:9000/
+            url: http://127.0.0.1:9000
+            isCommunityEdition: true
