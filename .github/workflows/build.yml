@@ -18,7 +18,7 @@ jobs:
         with:
          node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm coverage
+      - run: npm run coverage
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
