@@ -8,8 +8,9 @@
   },
   "scripts": {
     "start": "functions-framework --target=app",
-    "test": "jest --coverage",
-    "sonar": "node sonar-project.js",
+    "test": "jest src/app.test.js",
+    "sonar":  "node sonar-project.js",
+    "coverage":  "jest --coverage",
     "dev": "nodemon -r dotenv/config src/index.js"
   },
   "jest": {
