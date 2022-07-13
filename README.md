@@ -109,3 +109,9 @@ gcloud projects delete PROJECT_ID
 **Deployment**
 
 When deploying for the first time, it can happen that _Cloud Functions API_ and _Cloud Build API_ are still being enabled and `terraform apply` will fail. Just wait a few minutes and run the command again.
+
+
+
+## Integrating SonarQube
+
+https://www.abrahamberg.com/blog/sonarqube-pull-request-scanner-community/
