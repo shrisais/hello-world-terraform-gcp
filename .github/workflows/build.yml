@@ -1,8 +1,5 @@
 name: Build
 on:
-  push:
-    branches:
-      - main # or the name of your main branch
   pull_request:
     types: [ opened, synchronize, reopened ]
 jobs:
@@ -17,10 +14,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          PR_NUMBER: ${{ github.event.number }}
         with:
           args: >
-            -Dsonar.pullrequest.key=$PR_NUMBER
+            -Dsonar.pullrequest.key=${{ github.event.number }}
             -Dsonar.pullrequest.branch=${{ github.event.pull_request.head.ref }}
             -Dsonar.pullrequest.base=main
             -Dsonar.scm.revision=${{ github.event.pull_request.head.sha }}
