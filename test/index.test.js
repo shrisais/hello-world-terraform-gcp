@@ -1,7 +1,7 @@
-const folder = require('../src')
+const m = require('../src')
 
-describe('Test app is defined', () => {
+describe('#app', () => {
     it('should be defined', () => {
-        expect(folder.app).toBeDefined()
+        expect(m.app).toBeDefined()
     })
 })

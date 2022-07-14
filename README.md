@@ -110,7 +110,9 @@ gcloud projects delete PROJECT_ID
 
 When deploying for the first time, it can happen that _Cloud Functions API_ and _Cloud Build API_ are still being enabled and `terraform apply` will fail. Just wait a few minutes and run the command again.
 
+## Integrating with Fauna DB
 
+https://fauna.com/blog/getting-started-with-fauna-and-node-js-using-fastify
 
 ## Integrating SonarQube
 
